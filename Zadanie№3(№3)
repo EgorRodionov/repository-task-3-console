@@ -1,0 +1,66 @@
+using System;
+
+namespace Zadanie_3__3_
+{
+    //Пример работы перегруженных методов
+    class Program
+    {
+        static float f(float x)
+        {
+            float y;
+            if (Math.Abs(x) <= 1)
+            {
+                y = x * x - 1;
+            }
+            else if (Math.Abs(x) > 1 && Math.Abs(x) <= 2)
+            {
+                y = 2 * x - 1;
+            }
+            else
+            {
+                y = (float)Math.Pow(x, 5) - 1;
+            }
+            return y;
+        }
+
+        static void f(double x, out double y)
+        {
+            double a = 10;
+            y = x < a    // если x < a
+            ? 0    // то вывести 0
+            : x > a    // иначе если x > a
+            ? (x - a) / (x + a)    // то (x - a) / (x + a)
+            : 1;    //иначе 1
+
+        }
+
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Введите диапазон [a,b]");
+            Console.Write("a = ");
+            float a = float.Parse(Console.ReadLine());
+            Console.Write("b = ");
+            float b = float.Parse(Console.ReadLine());
+            Console.Write("h = ");
+            float h = float.Parse(Console.ReadLine());
+
+            if (h > 0)
+            {
+                for (float i = a; i <= b; i += h)
+                {
+
+                    Console.WriteLine("f({0}) = {1}", i, f(i));
+                }
+            }
+            else
+                Console.WriteLine("Ошибка! Некорректный ввод шага h. Введите число h больше нуля.");
+
+            Console.WriteLine("==========");
+                for (double x = 0; x <= 20; x += 1)
+                {
+                    f(x, out double y);
+                    Console.WriteLine($"f({x,5:F})={y,10:F2}");
+                }
+        }
+    }
+}
